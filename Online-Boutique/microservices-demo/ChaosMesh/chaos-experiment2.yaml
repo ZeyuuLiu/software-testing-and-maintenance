@@ -1,0 +1,14 @@
+# 场景2: 支付服务部分请求失败
+apiVersion: chaos-mesh.org/v1alpha1
+kind: HTTPChaos
+metadata:
+  name: paymentservice-partial-failure
+spec:
+  selector:
+    labelSelectors:
+      "app": "paymentservice"
+  port: 50051
+  method: "POST"
+  abort: true
+  duration: "10m"
+  ratio: 0.3  # 30%的请求会失败
