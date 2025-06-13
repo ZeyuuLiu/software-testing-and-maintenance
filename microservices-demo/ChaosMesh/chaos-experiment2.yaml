@@ -1,0 +1,16 @@
+# 场景2: 支付服务部分请求失败
+apiVersion: chaos-mesh.org/v1alpha1
+kind: HTTPChaos
+metadata:
+  name: paymentservice-partial-failure
+spec:
+  mode: fixed-percent  # 使用 fixed-percent 模式控制比例
+  value: "30"          # 30% 的请求会失败
+  selector:
+    labelSelectors:
+      "app": "paymentservice"
+  target: "Request"    # 指定目标是请求
+  port: 50051
+  method: "POST"
+  abort: true
+  duration: "10m"

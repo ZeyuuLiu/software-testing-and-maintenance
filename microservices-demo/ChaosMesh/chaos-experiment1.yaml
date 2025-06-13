@@ -1,0 +1,15 @@
+# 场景1: 购物车服务高延迟
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: cartservice-high-latency
+spec:
+  action: delay
+  mode: one
+  selector:
+    labelSelectors:
+      "app": "cartservice"
+  delay:
+    latency: "2s"
+    jitter: "500ms"
+  duration: "10m"
